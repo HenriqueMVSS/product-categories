@@ -3,14 +3,25 @@ package com.devsuperior.projectspringboot.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Product implements Serializable{
-	
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private Double price;
 	
+	@ManyToOne  //Define muitos para 1.
+	@JoinColumn(name = "category_id") //Define a chave estrangeira na tabela do banco.
 	private Category category;
 	
 	public Product() {
